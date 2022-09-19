@@ -114,7 +114,7 @@ router.patch("/users/me", auth, async (req, res) => {
     //   runValidators: true,
     // });
     // if (!user) {
-    //   return res.status(404).send;
+    //   return res.status(404).send();
     // }
     res.send(req.user);
   } catch (e) {
