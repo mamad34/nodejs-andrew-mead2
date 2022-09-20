@@ -1,9 +1,9 @@
 const express = require("express");
 require("./db/mongoose");
 const User = require("./models/user");
-const Task = require("./models/task");
 const userRouter = require("./routes/user-router");
 const taskRouter = require("./routes/task-route");
+const Task = require("./models/task");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -22,8 +22,8 @@ const port = process.env.PORT || 3000;
 // });
 
 app.use(express.json());
-app.use(userRouter);
 app.use(taskRouter);
+app.use(userRouter);
 
 //
 // Without middleware : new requset --> run route handler
@@ -77,7 +77,14 @@ app.listen(port, () => {
 // const Task = require("./models/task");
 
 const main = async () => {
-  const task = await Task.findById("631f4fd4f37478461509c813");
-  console.log(task.owner);
+  // const task = await Task.findById("6329de61801ab7fa7266fc79");
+  // await task.populate("owner");
+  // // convert the id of  owner to all profile of owner
+  // console.log(task.owner);
+
+  const user = await User.findById("6329dd95de5ee09e60bc3357");
+  await user.populate("tasks");
+  // tasks on userschema . virtual
+  console.log(user.tasks);
 };
 main();

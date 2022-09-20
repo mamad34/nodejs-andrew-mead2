@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Task = mongoose.model("Task", {
+const taskschema = new mongoose.Schema({
   description: {
     type: String,
     trim: true,
@@ -12,7 +12,7 @@ const Task = mongoose.model("Task", {
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
-    ref: "User",
+    ref: "user",
   },
 });
 
@@ -43,5 +43,5 @@ const Task = mongoose.model("Task", {
 //   .catch((error) => {
 //     console.log(error);
 //   });
-
+const Task = mongoose.model("task", taskschema);
 module.exports = Task;

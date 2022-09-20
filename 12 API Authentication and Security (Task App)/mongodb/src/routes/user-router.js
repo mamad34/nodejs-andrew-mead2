@@ -11,8 +11,9 @@ router.post("/users/login", async (req, res) => {
     );
     console.log("aaa", user);
     const token = await user.generateAuthToken();
+    console.log("done");
     // res.send(user);
-    res.send({ user, token });
+    res.send({ user: user, token });
   } catch (e) {
     res.status(400).send(e);
   }
@@ -50,28 +51,28 @@ router.get("/users/me", auth, async (req, res) => {
   //   });
 });
 
-router.get("/users/:id", async (req, res) => {
-  const _id = req.params.id;
-  try {
-    const user = await User.findById(_id);
-    if (!user) {
-      return res.status(404).send();
-    }
-    res.send(user);
-  } catch (e) {
-    res.status(500).send();
-  }
-  // User.findById(_id)
-  //   .then((user) => {
-  //     if (!user) {
-  //       return res.status(404).send();
-  //     }
-  //     res.send(user);
-  //   })
-  //   .catch((e) => {
-  //     res.status(500).send();
-  //   });
-});
+// router.get("/users/:id", async (req, res) => {
+//   const _id = req.params.id;
+//   try {
+//     const user = await User.findById(_id);
+//     if (!user) {
+//       return res.status(404).send();
+//     }
+//     res.send(user);
+//   } catch (e) {
+//     res.status(500).send();
+//   }
+// User.findById(_id)
+//   .then((user) => {
+//     if (!user) {
+//       return res.status(404).send();
+//     }
+//     res.send(user);
+//   })
+//   .catch((e) => {
+//     res.status(500).send();
+//   });
+// });
 
 router.post("/users/logout", auth, async (req, res) => {
   try {
